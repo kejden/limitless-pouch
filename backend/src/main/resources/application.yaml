@@ -1,0 +1,12 @@
+server:
+  port: '8080'
+logging:
+  file:
+    name: myapp.log
+    root: DEBUG
+spring:
+  data:
+    mongodb:
+      database: pouch
+      port: 27017
+      uri: mongodb+srv://${mongo_user}:${mongo_password}@${mongo_cluster}.mongodb.net/
