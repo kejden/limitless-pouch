@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/file")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class FileController {
 
     public final FileService fileService;
@@ -51,5 +51,10 @@ public class FileController {
                 .contentLength(Long.parseLong(file.getFilesize()))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getFilename()+"\"")
                 .body(file.getFile());
+    }
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public @ResponseBody byte[] getFile(@PathVariable String id) throws IOException {
+        return fileService.downloadFile(id).getFile();
     }
 }
